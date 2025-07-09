@@ -37,6 +37,9 @@
             </div>
         </div>
 
+
+
+
         <div class="main-center col-span-3 space-y-4">
             <div class="bg-white border border-gray-200 rounded-lg ">
                 <div class="flex flex-col flex-grow p-4">
