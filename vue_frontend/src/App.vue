@@ -7,7 +7,7 @@
                     <a href="#" class="text-xl">Wey</a>
                 </div>
 
-                <div class="menu-center flex space-x-12">
+                <div class="menu-center flex space-x-12" v-if="userStore.user.isAuthenticated">
                     <RouterLink to="/feed" class="text-purple-700">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
@@ -34,7 +34,16 @@
                 </div>
 
                 <div class="menu-right">
-                            <img src="http://www.w3.org/2000/svg" class="w-12 rounded-full">
+                    
+                    <template v-if="userStore.user.isAuthenticated && userStore.user.id">
+                            <img :src="userStore.user.avatar" class="w-12 rounded-full">
+                    </template>
+
+                    <template v-else>
+                        <RouterLink to="/login" class="mr-4 py-4 px-6 bg-gray-600 text-white rounded-lg">Log in</RouterLink>
+                        <RouterLink to="/signup" class="py-4 px-6 bg-purple-600 text-white rounded-lg">Sign up</RouterLink>
+                    </template>
+                
                 </div>
 
             </div>
