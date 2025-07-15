@@ -53,6 +53,16 @@ export default {
         }
     },
 
+    watch: { 
+        '$route.params.id': {
+            handler: function() {
+                this.getFeed()
+            },
+            deep: true,
+            immediate: true
+        }
+    },
+
     mounted() {
         this.getFeed()
     },
