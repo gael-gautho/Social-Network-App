@@ -10,6 +10,18 @@
                     <p class="text-xs text-gray-500">182 friends</p>
                     <p class="text-xs text-gray-500">120 posts</p>
                 </div>
+
+                <div class="mt-6">
+                    <button 
+                        class="inline-block py-4 px-3 bg-purple-600 text-xs text-white rounded-lg" 
+                        @click="sendFriendshipRequest"
+                        v-if="userStore.user.id !== user.id"
+                    >
+                        Send friendship request
+                    </button>
+                </div>
+
+
             </div>
         </div>
 
@@ -33,9 +45,21 @@ import FeedItem from '@/components/FeedItem.vue';
 import PeopleYouMayKnow from '@/components/PeopleYouMayKnow.vue';
 import Trends from '@/components/Trends.vue';
 import axios from 'axios'
+import { useUserStore } from '@/stores/user'
+import { useToastStore } from '@/stores/toast'
 
 
 export default {
+
+    setup() {
+        const userStore = useUserStore()
+        const toastStore = useToastStore()
+
+        return {
+            userStore,
+            toastStore
+        }
+    },
 
     name : 'ProfileView',
     components : {
@@ -68,6 +92,20 @@ export default {
     },
 
     methods: {
+        sendFriendshipRequest() {
+            axios
+                .post(`/api/friends/${this.$route.params.id}/request/`)
+                .then(response => {
+                    console.log('data', response.data)
+
+                    this.can_send_friendship_request = false
+
+            
+                })
+                .catch(error => {
+                    console.log('error', error)
+                })
+        },
         getFeed() {
             axios
                 .get(`/api/posts/profile/${this.$route.params.id}/`)
