@@ -19,6 +19,17 @@
                     >
                         Send friendship request
                     </button>
+
+
+                    <button 
+                        class="inline-block py-4 px-3 bg-red-600 text-xs text-white rounded-lg" 
+                        @click="logout"
+                        v-if="userStore.user.id === user.id"
+                    >
+                        Log out
+                    </button>
+
+
                 </div>
 
 
@@ -142,6 +153,14 @@ export default {
                     console.log('error', error)
                 })
         },
+
+        logout() {
+            console.log('Log out')
+
+            this.userStore.removeToken()
+
+            this.$router.push('/login')
+        }
     
     
     }
