@@ -7,7 +7,7 @@
                 <p><strong>{{user.name}}</strong></p>
 
                 <div class="mt-6 flex space-x-8 justify-around">
-                    <p class="text-xs text-gray-500">182 friends</p>
+                    <RouterLink :to="{name: 'friends', params:{'id': user.id}}" class="text-xs text-gray-500">{{ user.friends_count }} friends</RouterLink>
                     <p class="text-xs text-gray-500">120 posts</p>
                 </div>
 
@@ -72,7 +72,7 @@ export default {
         return {
             posts: [],
             user: {
-                id: ''
+                id: null
             },
         }
     },
@@ -100,7 +100,12 @@ export default {
 
                     this.can_send_friendship_request = false
 
-            
+                    if (response.data.message == 'request already sent') {
+                        this.toastStore.showToast(5000, 'The request has already been sent!', 'bg-red-300')
+                    } else {
+                        this.toastStore.showToast(5000, 'The request was sent!', 'bg-emerald-300')
+                    }
+
                 })
                 .catch(error => {
                     console.log('error', error)
