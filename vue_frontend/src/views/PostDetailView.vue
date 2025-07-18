@@ -9,11 +9,23 @@
             </div>
 
             <div
-                class="p-4 ml-6 bg-white border border-gray-200 rounded-lg"
+                class="p-4 ml-20 bg-white border border-gray-200 rounded-lg"
                 v-for="comment in post.comments"
                 v-bind:key="comment.id"
             >
                 <CommentItem v-bind:comment="comment" />
+            </div>
+
+            <div class="bg-white border border-gray-200 rounded-lg">
+                <form v-on:submit.prevent="submitForm" method="post">
+                    <div class="p-4">  
+                        <textarea v-model="body" class="p-4 w-full bg-gray-100 rounded-lg" placeholder="What do you think?"></textarea>
+                    </div>
+
+                    <div class="p-4 border-t border-gray-100">
+                        <button class="inline-block py-4 px-6 bg-purple-600 text-white rounded-lg">Comment</button>
+                    </div>
+                </form>
             </div>
 
             
@@ -74,6 +86,25 @@ export default {
                 })
         },
 
+        submitForm() {
+            console.log('submitForm', this.body)
+
+            axios
+                .post(`/api/posts/${this.$route.params.id}/comment/`, {
+                    'body': this.body
+                })
+                .then(response => {
+                    console.log('data', response.data)
+
+                    this.post.comments_count = response.data.comments_count;
+                    
+                    this.post.comments.push(response.data.comment)
+                    this.body = ''
+                })
+                .catch(error => {
+                    console.log('error', error)
+                })
+        }
         
     }
 }

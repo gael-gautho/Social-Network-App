@@ -3,8 +3,8 @@ from django.db.models import Exists, OuterRef
 
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 
-from .models import Post, User, Like
-from .serializers import PostSerializer, UserSerializer, PostDetailSerializer
+from .models import Post, User, Like, Comment
+from .serializers import PostSerializer, UserSerializer, PostDetailSerializer, CommentSerializer
 from .forms import PostForm
 
 
@@ -109,4 +109,22 @@ def post_like(request, pk):
             'message': message,
             'post': serializer.data
         })
+
+
+@api_view(['POST'])
+def post_create_comment(request, pk):
+
+    post = Post.objects.get(pk=pk)
+    comment = Comment.objects.create(body=request.data.get('body'), created_by=request.user, related_post=post)
+
+    post.comments_count = post.comments_count + 1
+    post.save()
+
+    serializer = CommentSerializer(comment)
+
+    return JsonResponse({'comment': serializer.data,
+                         'comments_count': post.comments_count   
+                        }, safe=False)
+
+
 
