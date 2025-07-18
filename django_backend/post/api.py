@@ -4,7 +4,7 @@ from django.db.models import Exists, OuterRef
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 
 from .models import Post, User, Like
-from .serializers import PostSerializer, UserSerializer
+from .serializers import PostSerializer, UserSerializer, PostDetailSerializer
 from .forms import PostForm
 
 
@@ -46,6 +46,21 @@ def post_list_profile(request, id):
         'posts': posts_serializer.data,
         'user': user_serializer.data,
     }, safe=False)
+
+
+@api_view(['GET'])
+def post_detail(request, pk):
+    
+    post = Post.objects.filter(pk=pk).annotate(
+        has_liked=Exists(
+        Like.objects.filter(related_post=OuterRef('id'),
+                            created_by=request.user))).first()
+
+
+    return JsonResponse({
+        'post': PostDetailSerializer(post).data
+    })
+
 
 
 @api_view(['POST'])

@@ -21,6 +21,7 @@ class Post(models.Model):
     attachments = models.ManyToManyField(PostAttachment, blank=True)
 
     likes_count = models.IntegerField(default=0)
+    comments_count = models.IntegerField(default=0)
 
     created_at = models.DateTimeField(auto_now_add=True)
     created_by = models.ForeignKey(User, related_name='posts', on_delete=models.CASCADE)
@@ -37,3 +38,17 @@ class Like(models.Model):
     created_by = models.ForeignKey(User, related_name='likes', on_delete=models.CASCADE)
     related_post = models.ForeignKey(Post, related_name='likes', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
+
+
+class Comment(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    body = models.TextField(blank=True, null=True)
+    created_by = models.ForeignKey(User, related_name='comments', on_delete=models.CASCADE)
+    related_post = models.ForeignKey(Post, related_name='comments', on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ('created_at',)
+    
+    def created_at_formatted(self):
+       return timesince(self.created_at)
