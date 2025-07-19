@@ -23,3 +23,22 @@ def conversation_detail(request, pk):
     serializer = ConversationDetailSerializer(conversation)
 
     return JsonResponse(serializer.data, safe=False)
+
+
+
+@api_view(['POST'])
+def conversation_send_message(request, pk):
+    conversation = Conversation.objects.filter(users__in=list([request.user])).get(pk=pk)
+
+    sent_to = conversation.users.exclude(id=request.user.id).first()
+
+    conversation_message = ConversationMessage.objects.create(
+        conversation=conversation,
+        body=request.data.get('body'),
+        created_by=request.user,
+        sent_to=sent_to
+    )
+
+    serializer = ConversationMessageSerializer(conversation_message)
+
+    return JsonResponse(serializer.data, safe=False)

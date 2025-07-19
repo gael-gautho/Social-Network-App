@@ -20,7 +20,7 @@
                             
                         </div>
 
-                        <span class="text-xs text-gray-500">18 minutes ago</span>
+                        <span class="text-xs text-gray-500">{{ conversation.modified_at_formatted}} ago</span>
                     </div>
 
                 </div>
@@ -67,13 +67,16 @@
             </div>
 
             <div class="bg-white border border-gray-200 rounded-lg">
+                
+                <form v-on:submit.prevent="submitForm">
                 <div class="p-4">  
-                    <textarea class="p-4 w-full bg-gray-100 rounded-lg resize-none" placeholder="What do you want to say?"></textarea>
+                    <textarea v-model="body" class="p-4 w-full bg-gray-100 rounded-lg resize-none" placeholder="What do you want to say?"></textarea>
                 </div>
 
                 <div class="p-4 border-t border-gray-100 flex justify-between">
-                    <a href="#" class="inline-block py-4 px-6 bg-purple-600 text-white rounded-lg"> Send </a>
+                    <button class="inline-block py-4 px-6 bg-purple-600 text-white rounded-lg"> Send </button>
                 </div>
+                </form> 
             </div>
         </div>
     </div>
@@ -149,6 +152,25 @@ export default {
                     console.log(error)
                 })
         },
+
+        submitForm() {
+            console.log('submitForm', this.body)
+
+            axios
+                .post(`/api/chat/${this.activeConversation.id}/send/`, {
+                    body: this.body
+                })
+                .then(response => {
+                    console.log(response.data)
+
+                    this.activeConversation.messages.push(response.data)
+                    this.body = ''
+                    
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+        }
 
 
 
