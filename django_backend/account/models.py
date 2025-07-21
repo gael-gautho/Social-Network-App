@@ -38,6 +38,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     friends = models.ManyToManyField('self')
     friends_count = models.IntegerField(default=0)
 
+    posts_count = models.IntegerField(default=0)
 
 
     is_active = models.BooleanField(default=True)
