@@ -7,7 +7,9 @@ urlpatterns = [
     path('', api.post_list, name='post_list'),
     path('<uuid:pk>/', api.post_detail, name='post_detail'),
     path('profile/<uuid:id>/', api.post_list_profile, name='post_list_profile'),
-    
+    path('trends/', api.get_trends, name='get_trends'),
+
+
     # post
 
     path('create/', api.post_create, name='post_create'),

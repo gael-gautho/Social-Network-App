@@ -52,3 +52,8 @@ class Comment(models.Model):
     
     def created_at_formatted(self):
        return timesince(self.created_at)
+
+
+class Trend(models.Model):
+    hashtag = models.CharField(max_length=255)
+    occurences = models.IntegerField()

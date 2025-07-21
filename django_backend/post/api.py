@@ -3,8 +3,8 @@ from django.db.models import Exists, OuterRef
 
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 
-from .models import Post, User, Like, Comment
-from .serializers import PostSerializer, UserSerializer, PostDetailSerializer, CommentSerializer
+from .models import Post, User, Like, Comment, Trend
+from .serializers import PostSerializer, UserSerializer, PostDetailSerializer, CommentSerializer, TrendSerializer
 from .forms import PostForm
 
 
@@ -129,6 +129,15 @@ def post_create_comment(request, pk):
     return JsonResponse({'comment': serializer.data,
                          'comments_count': post.comments_count   
                         }, safe=False)
+
+
+
+@api_view(['GET'])
+def get_trends(request):
+    serializer = TrendSerializer(Trend.objects.all(), many=True)
+
+    return JsonResponse(serializer.data, safe=False)
+
 
 
 
