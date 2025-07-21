@@ -12,6 +12,9 @@ class Conversation(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
     
+    class Meta:
+        ordering = ('-created_at',)
+
     def modified_at_formatted(self):
        return timesince(self.created_at)
 

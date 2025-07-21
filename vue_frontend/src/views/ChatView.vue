@@ -9,6 +9,7 @@
                     class="flex items-center justify-between"
                     v-for = "conversation in conversations"
                     :key ="conversation.id"
+                    v-on:click="setActiveConversation(conversation)"                
                     >
                         <div class="flex items-center space-x-2">
                             
@@ -151,6 +152,13 @@ export default {
                 .catch(error => {
                     console.log(error)
                 })
+        },
+
+        setActiveConversation(conversation) {
+            console.log('setActiveConversation', conversation)
+
+            this.activeConversation = conversation
+            this.getMessages()
         },
 
         submitForm() {
