@@ -24,6 +24,15 @@ def post_list(request):
     )
 )
 
+    trend = request.GET.get('trend', '')
+
+    if trend:
+        posts = Post.objects.filter(body__icontains='#' + trend).annotate(
+    has_liked=Exists(Like.objects.filter(related_post=OuterRef('id'),
+                            created_by=request.user)
+    )
+)
+
     serializer = PostSerializer(posts, many=True)
 
     return JsonResponse(serializer.data, safe=False)
