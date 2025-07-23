@@ -58,7 +58,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         if self.avatar:
             return settings.WEBSITE_URL + self.avatar.url
         else:
-            return 'https://picsum.photos/200/200'
+            return ''
 
 
 class FriendshipRequest(models.Model):

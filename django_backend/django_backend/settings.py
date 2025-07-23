@@ -17,6 +17,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+WEBSITE_URL = 'http://127.0.0.1:8000'
+
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
