@@ -2,6 +2,7 @@ from django.urls import path
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 from . import api
+from . import views
 
 urlpatterns = [
     path('me/', api.me, name='me'),
@@ -14,5 +15,6 @@ urlpatterns = [
     path('friends/<uuid:pk>/<str:status>/', api.handle_request, name='handle_request'),
     path('editprofile/', api.editprofile, name='editprofile'),
     path('editpassword/', api.editpassword, name='editpassword'),
+    path('activateemail/', views.activateemail, name='activateemail'),
 
 ]

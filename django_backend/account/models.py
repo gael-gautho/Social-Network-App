@@ -58,7 +58,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         if self.avatar:
             return settings.WEBSITE_URL + self.avatar.url
         else:
-            return ''
+            return 'http://127.0.0.1:8000/media/avatars/blank-profile.png'
 
 
 class FriendshipRequest(models.Model):
