@@ -14,3 +14,5 @@ class EditProfileForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ('email', 'name', 'avatar',)
+
+
