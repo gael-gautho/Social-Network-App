@@ -10,6 +10,8 @@ from .forms import SignupForm, EditProfileForm
 from .models import User, FriendshipRequest
 from .serializers import UserSerializer, FriendshipRequestSerializer
 
+from notification.utils import create_notification
+
 
 
 @api_view(['GET'])
@@ -70,6 +72,9 @@ def send_friendship_request(request, pk):
 
     if not check1 and not check2:
         friendrequest = FriendshipRequest.objects.create(created_for=user, created_by=request.user)
+        notification = create_notification(request, 'new_friendrequest', friendrequest_id=friendrequest.id)
+
+
 
         return JsonResponse({'message': 'friendship request created'})
     else:
@@ -102,16 +107,21 @@ def get_friends(request, pk):
 def handle_request(request, pk, status):
     user = User.objects.get(pk=pk)
     friendship_request = FriendshipRequest.objects.filter(created_for=request.user).get(created_by=user)
-    friendship_request.status = status
-    friendship_request.save()
+    
+    if friendship_request.status == 'sent':
+        friendship_request.status = status
+        friendship_request.save()
 
-    if status == 'accepted':
-        user.friends.add(request.user)
-        user.friends_count = user.friends_count + 1
-        user.save()
+        if status == 'accepted':
+            user.friends.add(request.user)
+            user.friends_count = user.friends_count + 1
+            user.save()
 
-        request.user.friends_count = request.user.friends_count + 1
-        request.user.save()
+            request.user.friends_count = request.user.friends_count + 1
+            request.user.save()
+
+            notification = create_notification(request, 'accepted_friendrequest', friendrequest_id=friendship_request.id)
+
 
     return JsonResponse({'message': 'friendship request updated'})
 

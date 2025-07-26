@@ -7,6 +7,9 @@ from .models import Post, User, Like, Comment, Trend
 from .serializers import PostSerializer, UserSerializer, PostDetailSerializer, CommentSerializer, TrendSerializer
 from .forms import PostForm, AttachmentForm
 
+from notification.utils import create_notification
+
+
 
 @api_view(['GET'])
 def post_list(request):
@@ -113,6 +116,9 @@ def post_like(request, pk):
         post.likes_count = post.likes_count + 1
         message='post liked'
 
+        notification = create_notification(request, 'post_like', post_id=post.id)
+
+
     else:
         post.likes_count = post.likes_count - 1
         existing_like.delete()
@@ -124,6 +130,7 @@ def post_like(request, pk):
         has_liked=Exists(
         Like.objects.filter(related_post=OuterRef('id'),
                             created_by=request.user))).first()
+ 
 
     serializer = PostSerializer(post)
 
@@ -144,6 +151,9 @@ def post_create_comment(request, pk):
     post.save()
 
     serializer = CommentSerializer(comment)
+
+    notification = create_notification(request, 'post_comment', post_id=post.id)
+
 
     return JsonResponse({'comment': serializer.data,
                          'comments_count': post.comments_count   

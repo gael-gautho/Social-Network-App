@@ -66,6 +66,7 @@ INSTALLED_APPS = [
     'post',
     'search',
     'chat',
+    'notification'
 ]
 
 MIDDLEWARE = [

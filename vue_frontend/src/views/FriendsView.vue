@@ -35,8 +35,8 @@
                     </p>
 
                     <div class="mt-6 flex space-x-8 justify-around">
-                        <p class="text-xs text-gray-500"> {{ user.friends_count }} friends</p>
-                        <p class="text-xs text-gray-500"> {{ user.posts_count }} posts</p>
+                        <p class="text-xs text-gray-500"> {{ friendshipRequest.created_by.friends_count }} friends</p>
+                        <p class="text-xs text-gray-500"> {{ friendshipRequest.created_by.posts_count }} posts</p>
                     </div>
 
                     <div class="mt-6 space-x-4">
@@ -146,6 +146,7 @@ export default {
             axios
                 .post(`/api/friends/${pk}/${status}/`)
                 .then(response => {
+                    
                     console.log('data', response.data)
                 })
                 .catch(error => {
