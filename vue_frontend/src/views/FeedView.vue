@@ -6,7 +6,10 @@
                 <form v-on:submit.prevent="submitForm" method="post">
                 <div class="p-4">  
                     <textarea v-model="body" class="p-4 w-full bg-gray-100 rounded-lg" placeholder="What are you thinking about?"></textarea>
-                    
+                    <label>
+                        <input type="checkbox" v-model="is_private"> Private
+                    </label>
+
                     <div id="preview" v-if="url">
                         <img :src="url" class="w-[100px] mt-3 rounded-xl" />
                     </div>
@@ -61,7 +64,9 @@ export default {
         return {
             posts: [],
             body: '',
-            url:''
+            url:'',
+            is_private: false,
+
         }
     },
 
@@ -75,8 +80,6 @@ export default {
             const file = e.target.files[0];
             this.url = URL.createObjectURL(file)
         },
-
-
 
         getFeed() {
             axios
@@ -96,6 +99,8 @@ export default {
             let formData = new FormData()
             formData.append('image', this.$refs.file.files[0])
             formData.append('body', this.body)
+            formData.append('is_private', this.is_private)
+
 
             axios
                 .post('/api/posts/create/', formData, {
@@ -110,7 +115,9 @@ export default {
                     this.body = ''
                     this.$refs.file.value = null
                     this.url = null
-                    
+                    this.is_private = false
+
+
                 })
                 .catch(error => {
                     console.log('error', error)

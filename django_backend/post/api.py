@@ -1,5 +1,5 @@
 from django.http import JsonResponse
-from django.db.models import Exists, OuterRef
+from django.db.models import Exists, OuterRef, Q
 
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 
@@ -50,6 +50,11 @@ def post_list_profile(request, id):
         Like.objects.filter(related_post=OuterRef('id'),
                             created_by=request.user)))
 
+
+    if not request.user in user.friends.all() and request.user != user:
+        posts = posts.filter(is_private=False)
+
+
     posts_serializer = PostSerializer(posts, many=True)
     user_serializer = UserSerializer(user)
 
@@ -63,10 +68,19 @@ def post_list_profile(request, id):
 @api_view(['GET'])
 def post_detail(request, pk):
     
+    user_ids = [request.user.id]
+
+    for user in request.user.friends.all():
+        user_ids.append(user.id)
+    
     post = Post.objects.filter(pk=pk).annotate(
         has_liked=Exists(
         Like.objects.filter(related_post=OuterRef('id'),
                             created_by=request.user))).first()
+
+
+    post = Post.objects.filter(Q(created_by_id__in=list(user_ids)) | Q(is_private=False)).get(pk=pk)
+
 
 
     return JsonResponse({
