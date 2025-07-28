@@ -34,6 +34,8 @@ class Post(models.Model):
 
     is_private = models.BooleanField(default=False)
 
+    reported_by_users = models.ManyToManyField(User, blank=True)
+
 
     class Meta:
         ordering = ('-created_at',)
