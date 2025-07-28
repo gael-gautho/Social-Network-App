@@ -58,7 +58,7 @@
             v-for="post in posts"
             :key=post.id
             >
-                <FeedItem :post="post" />
+                <FeedItem :post="post" @deletePost="deletePost" />
 
             </div>
         </div>
@@ -191,6 +191,11 @@ export default {
                 .catch(error => {
                     console.log('error', error)
                 })
+        },
+
+        deletePost(id) {
+            console.log("Delete Post")
+            this.posts = this.posts.filter(post => post.id !== id)
         },
     
     

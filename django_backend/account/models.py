@@ -37,7 +37,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     avatar = models.ImageField(upload_to='avatars', blank=True, null=True)
     friends = models.ManyToManyField('self')
     friends_count = models.IntegerField(default=0)
-    friends_suggestions = models.ManyToManyField('self')
+    friends_suggestions = models.ManyToManyField('self', blank=True, null=True)
 
 
 
