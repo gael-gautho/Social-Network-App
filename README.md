@@ -1,119 +1,102 @@
 # Social-Network-App
 
-<!-- About the Project -->
 ## :star2: About the Project
 
-<!-- Features -->
-### :dart: Features
+A social network app similar to twitter or facebook
 
-- Feature 1
-- Feature 2
-- Feature 3
+## :dart: Features
 
-<!-- TechStack -->
-### :space_invader: Tech Stack
+- JWT-based authentication (login, signup, logout)
+- Create, like, and comment on posts
+- Real-time private messaging
+- Friend request system (send, accept, reject)
+- Profile editing with avatar upload
+- Human-readable timestamps
+
+## :space_invader: Tech Stack
 
 <details>
   <summary>Client</summary>
   <ul>
-    <li><a href="https://www.typescriptlang.org/">Typescript</a></li>
-    <li><a href="https://nextjs.org/">Next.js</a></li>
-    <li><a href="https://reactjs.org/">React.js</a></li>
+    <li><a href="https://vuejs.org/">Vue.js 3</a></li>
     <li><a href="https://tailwindcss.com/">TailwindCSS</a></li>
+    <li><a href="https://pinia.vuejs.org/">Pinia</a></li>
+    <li><a href="https://axios-http.com/">Axios</a></li>
   </ul>
 </details>
 
 <details>
   <summary>Server</summary>
   <ul>
-    <li><a href="https://www.typescriptlang.org/">Typescript</a></li>
-    <li><a href="https://expressjs.com/">Express.js</a></li>
-    <li><a href="https://go.dev/">Golang</a></li>
-    <li><a href="https://nestjs.com/">Nest.js</a></li>
-    <li><a href="https://socket.io/">SocketIO</a></li>
-    <li><a href="https://www.prisma.io/">Prisma</a></li>    
-    <li><a href="https://www.apollographql.com/">Apollo</a></li>
-    <li><a href="https://graphql.org/">GraphQL</a></li>
-  </ul>
-</details>
-
-<details>
-<summary>Database</summary>
-  <ul>
-    <li><a href="https://www.mysql.com/">MySQL</a></li>
-    <li><a href="https://www.postgresql.org/">PostgreSQL</a></li>
-    <li><a href="https://redis.io/">Redis</a></li>
-    <li><a href="https://neo4j.com/">Neo4j</a></li>
-    <li><a href="https://www.mongodb.com/">MongoDB</a></li>
-  </ul>
-</details>
-
-<details>
-<summary>DevOps</summary>
-  <ul>
-    <li><a href="https://www.docker.com/">Docker</a></li>
-    <li><a href="https://www.jenkins.io/">Jenkins</a></li>
-    <li><a href="https://circleci.com/">CircleCLI</a></li>
+    <li><a href="https://www.djangoproject.com/">Django</a></li>
+    <li><a href="https://www.django-rest-framework.org/">Django REST Framework</a></li>
+    <li><a href="https://channels.readthedocs.io/">Django Channels</a></li>
+    <li><a href="https://jwt.io/">JWT Authentication</a></li>
   </ul>
 </details>
 
 
-
-
-
-<!-- Screenshots -->
-### :camera: Screenshots
+## :camera: Screenshots
 
 <div align="center"> 
-  <img src="https://placehold.co/600x400?text=Your+Screenshot+here" alt="screenshot" />
+  <img src="https://placehold.co/600x400?text=Feed+View" alt="Feed Screenshot" />
+  <img src="https://placehold.co/600x400?text=Chat+View" alt="Chat Screenshot" />
+  <img src="https://placehold.co/600x400?text=Profile+View" alt="Profile Screenshot" />
 </div>
 
+## :toolbox: Getting Started
 
-<!-- Getting Started -->
-## 	:toolbox: Getting Started
-
-<!-- Prerequisites -->
 ### :bangbang: Prerequisites
 
-This project uses Yarn as package manager
+- Python 3.11+
+- Node.js and npm
 
-```bash
- npm install --global yarn
-```
 
-<!-- Installation -->
-### :gear: Installation
-
-Install my-project with npm
-
-```bash
-  yarn install my-project
-  cd my-project
-```
-
-<!-- Run Locally -->
 ### :running: Run Locally
 
 Clone the project
 
 ```bash
-  git clone https://github.com/Louis3797/awesome-readme-template.git
+git clone https://github.com/gael-gautho/social-network-app.git
 ```
 
 Go to the project directory
 
 ```bash
-  cd my-project
+  cd social-network-app 
 ```
 
-Install dependencies
+Install backend dependencies
 
 ```bash
-  yarn install
+cd django_backend
+pip install -r requirements.txt
+```
+
+Apply migrations and create your database
+
+```bash
+python manage.py migrate
 ```
 
 Start the server
 
 ```bash
-  yarn start
+python manage.py runserver
 ```
+
+Install frontend dependencies
+
+```bash
+cd ../vue_frontend
+npm install
+```
+
+Start the server
+
+```bash
+npm run dev
+```
+
+
+
