@@ -21,10 +21,13 @@ WEBSITE_URL = 'http://127.0.0.1:8000'
 
 
 CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
     "http://localhost:5173",
+
 ]
 
 CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:3000",
     "http://localhost:5173",
 ]
 
@@ -41,8 +44,8 @@ REST_FRAMEWORK = {
 AUTH_USER_MODEL = 'account.User'
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(days=30),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=180),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=1),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
     'ROTATE_REFRESH_TOKENS': False,
 }
 

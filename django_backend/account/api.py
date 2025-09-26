@@ -160,7 +160,8 @@ def editpassword(request):
 
 @api_view(['GET'])
 def get_friends_suggestions(request):
+
     serializer = UserSerializer(request.user.friends_suggestions.all(), many=True)
 
-    return JsonResponse(serializer.data, safe=False)
+    return JsonResponse({'data' : serializer.data}, safe=False)
 

@@ -38,7 +38,7 @@ def post_list(request):
 
     serializer = PostSerializer(posts, many=True)
 
-    return JsonResponse(serializer.data, safe=False)
+    return JsonResponse({'data':serializer.data}, safe=False)
 
 
 @api_view(['GET'])
@@ -179,7 +179,7 @@ def post_create_comment(request, pk):
 def get_trends(request):
     serializer = TrendSerializer(Trend.objects.all(), many=True)
 
-    return JsonResponse(serializer.data, safe=False)
+    return JsonResponse({'data':serializer.data}, safe=False)
 
 
 @api_view(['DELETE'])
