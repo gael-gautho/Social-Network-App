@@ -40,6 +40,7 @@ async _request(url: string, method: string, data?: any): Promise<any> {
             return json;
 
         } catch (error) {
+            // Todo toast error
             console.error(`Erreur de l'API (${method} ${url}):`, error);
             throw error; 
         }

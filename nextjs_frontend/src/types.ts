@@ -11,6 +11,17 @@ export interface PostAttachment {
   get_image: string;
 }
 
+export interface Comment {
+  id: string;
+  body: string;
+  created_at_formatted: string;
+  created_by: {
+    id: string;
+    name: string;
+    get_avatar: string;
+  };
+}
+
 export interface Post {
   id: string;
   body: string;
@@ -21,6 +32,7 @@ export interface Post {
   comments_count: number;
   has_liked: boolean;
   is_private: boolean;
+  comments?: Comment[]; 
 }
 
 export interface Trend {
@@ -29,10 +41,6 @@ export interface Trend {
   occurences: number;
 }
 
-export interface ApiResponse<T> {
-  data: T;
-  message?: string;
-}
 
 export interface MyJwtPayload {
   user_id: string;

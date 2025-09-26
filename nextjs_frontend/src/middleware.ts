@@ -93,6 +93,7 @@ function isExpired(token: string) {
 export const config = {
     matcher: [
         '/api/:path*',
-        '/feed:path*'
+        '/feed:path*',
+        '/post/:path*',
     ],
 };

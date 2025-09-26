@@ -2,6 +2,8 @@
 
 import { useState, useRef } from 'react';
 import { Post } from '@/types';
+import apiService from '@/libs/apiService';
+import { toast } from 'sonner';
 
 interface FeedFormProps {
   onPostCreated: (post: Post) => void;
@@ -31,7 +33,6 @@ export default function FeedForm({ onPostCreated }: FeedFormProps) {
     
     setIsSubmitting(true);
 
-    try {
       const formData = new FormData();
       
       if (fileInputRef.current?.files?.[0]) {
@@ -41,30 +42,24 @@ export default function FeedForm({ onPostCreated }: FeedFormProps) {
       formData.append('body', body);
       formData.append('is_private', isPrivate.toString());
 
-      const response = await fetch('/api/posts/create/', {
-        method: 'POST',
-        body: formData,
-      });
-
-      if (response.ok) {
-        const newPost: Post = await response.json();
+      const response = await apiService.post('/api/posts/create/', formData);
+      
+      if (response.new_post) {
+        const newPost: Post = response.new_post;
         onPostCreated(newPost);
-        
-        // Reset form
+
+        toast.success('Post created')
+
         setBody('');
         setIsPrivate(false);
         setPreviewUrl(null);
         if (fileInputRef.current) {
           fileInputRef.current.value = '';
         }
-      } else {
-        console.error('Failed to create post');
       }
-    } catch (error) {
-      console.error('Error creating post:', error);
-    } finally {
+
       setIsSubmitting(false);
-    }
+    
   };
 
   return (

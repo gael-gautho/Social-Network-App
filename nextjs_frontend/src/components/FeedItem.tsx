@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { Post } from '@/types';
+import apiService from '@/libs/apiService';
+import { toast } from 'sonner';
 
 interface FeedItemProps {
   post: Post;
@@ -15,22 +17,13 @@ export default function FeedItem({ post, onDeletePost }: FeedItemProps) {
   const [hasLiked, setHasLiked] = useState(post.has_liked);
 
   const likePost = async () => {
-    try {
-      const response = await fetch(`/api/posts/${post.id}/like/`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        setLikes(data.post.likes_count);
-        setHasLiked(data.post.has_liked);
+   
+      const response = await apiService.post(`/api/posts/${post.id}/like/`,'');
+      if (response.message ) {
+        setLikes(response.post.likes_count);
+        setHasLiked(response.post.has_liked);
       }
-    } catch (error) {
-      console.error('Error liking post:', error);
-    }
+ 
   };
 
   const toggleExtraModal = () => {
@@ -39,13 +32,10 @@ export default function FeedItem({ post, onDeletePost }: FeedItemProps) {
 
   const deletePost = async () => {
     try {
-      const response = await fetch(`/api/posts/${post.id}/delete/`, {
-        method: 'DELETE',
-      });
-
-      if (response.ok) {
+      const response = await apiService.delete(`/api/posts/${post.id}/delete/`);
+      if (response.message) {
         onDeletePost(post.id);
-        // TODO: Show toast notification
+        toast.success('Post deleted')
       }
     } catch (error) {
       console.error('Error deleting post:', error);
@@ -54,17 +44,15 @@ export default function FeedItem({ post, onDeletePost }: FeedItemProps) {
 
   const reportPost = async () => {
     try {
-      const response = await fetch(`/api/posts/${post.id}/report/`, {
-        method: 'POST',
-      });
+      const response = await apiService.post(`/api/posts/${post.id}/report/`,'');
 
-      if (response.ok) {
-        const data = await response.json();
-        // TODO: Show toast notification
-        console.log(data.message);
+      if (response.message) {
+        toast.success(response.message)
+        console.log(response.message);
       }
     } catch (error) {
       console.error('Error reporting post:', error);
+      toast.error('Error reporting post ! Try again later')
     }
   };
 
