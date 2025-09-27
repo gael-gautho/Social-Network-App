@@ -1,6 +1,4 @@
-import { jwtDecode } from 'jwt-decode';
 import { NextRequest, NextResponse } from 'next/server';
-import { MyJwtPayload } from './types';
 
 const publicPaths = ['/', '/jobs/[id]', '/jobs/search'];
 
@@ -95,5 +93,6 @@ export const config = {
         '/api/:path*',
         '/feed:path*',
         '/post/:path*',
+        '/profile/:path*'
     ],
 };

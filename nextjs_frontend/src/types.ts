@@ -42,6 +42,22 @@ export interface Trend {
 }
 
 
-export interface MyJwtPayload {
+export interface UserInfo {
   user_id: string;
+}
+
+
+export interface ProfileUser extends User {
+  friends_count: number;
+  posts_count: number;
+  can_send_friendship_request?: boolean;
+}
+
+export interface ProfileResponse {
+  posts: Post[];
+  user: ProfileUser;
+}
+
+export interface FriendshipRequestResponse {
+  message: string;
 }

@@ -1,9 +1,19 @@
+import { UserInfo } from "@/types";
+import { jwtDecode } from "jwt-decode";
+import { cookies } from "next/headers";
 import Link from "next/link";
 
 
-export default function Navbar() {
+export default async function Navbar() {
 
-    const isLoggedIn = true
+    const refreshToken = (await cookies()).get('session_refresh_token')?.value;
+    
+    let userInfo = null;
+
+    if (refreshToken) {
+        userInfo = jwtDecode<UserInfo>(refreshToken)
+    }
+
 
 return(
     <nav className="top-0 w-full z-50 bg-white/80 backdrop-blur-lg border-b border-gray-200/50">
@@ -20,7 +30,7 @@ return(
                     </span>
                 </div>
 
-                {isLoggedIn &&
+                {refreshToken &&
                     <div className="menu-center flex space-x-12" v-if="userStore.user.isAuthenticated">
                     <Link href="/feed" className="text-purple-700">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
@@ -48,7 +58,7 @@ return(
                 </div>}
             
 
-                {isLoggedIn ? (<div><Link href={""}>Profile</Link></div>) : 
+                {refreshToken ? (<div><Link href={`/profile/${userInfo?.user_id}`}>Profile</Link></div>) : 
                     
                     (<div className="hidden md:flex items-center space-x-8">
                      <Link href="/login" className="mr-4 py-4 px-6 bg-gray-600 text-white rounded-lg">Log in</Link>
