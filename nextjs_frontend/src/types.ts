@@ -1,9 +1,9 @@
-// types/index.ts
 export interface User {
   id: string;
   name: string;
   get_avatar: string;
-  posts_count?: number;
+  friends_count: number;
+  posts_count: number;
 }
 
 export interface PostAttachment {

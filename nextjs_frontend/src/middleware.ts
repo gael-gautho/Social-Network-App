@@ -93,6 +93,7 @@ export const config = {
         '/api/:path*',
         '/feed:path*',
         '/post/:path*',
-        '/profile/:path*'
+        '/profile/:path*',
+        '/search/:path*'
     ],
 };
