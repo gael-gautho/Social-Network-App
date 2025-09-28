@@ -5,6 +5,8 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { ProfileUser, FriendshipRequestResponse } from '@/types';
 import { useUser } from '@/app/userContext';
+import apiService from '@/libs/apiService';
+import { toast } from 'sonner';
 
 interface ProfileSidebarProps {
   user: ProfileUser;
@@ -27,33 +29,21 @@ export default function ProfileSidebar({
     if (isSubmitting) return;
     
     setIsSubmitting(true);
-    
-    try {
-      const response = await fetch(`/api/friends/${profileId}/request/`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+    const response = await apiService.post(`/api/friends/${profileId}/request/`, '');
 
-      if (response.ok) {
-        const data: FriendshipRequestResponse = await response.json();
-        
-        if (data.message === 'request already sent') {
-          // TODO: Show toast notification
-          console.log('The request has already been sent!');
-        } else {
-          // TODO: Show toast notification
-          console.log('The request was sent!');
-          onFriendshipRequest();
-        }
+    if (response.message) {
+      
+      if (response.message === 'request already sent') {
+        toast.error(response.message)
+        console.log('The request has already been sent!');
+      } else {
+        toast.success(response.message)
+        console.log('The request was sent!');
+        onFriendshipRequest();
       }
-    } catch (error) {
-      console.error('Error sending friendship request:', error);
-      // TODO: Show error toast
-    } finally {
-      setIsSubmitting(false);
     }
+    setIsSubmitting(false);
+
   };
 
   const sendDirectMessage = async () => {
@@ -88,7 +78,7 @@ export default function ProfileSidebar({
 
       <div className="mt-6 flex space-x-8 justify-around">
         <Link 
-          href={`/friends/${user.id}`}
+          href={`/profile/${user.id}/friends`}
           className="text-xs text-gray-500 hover:text-purple-600 transition-colors"
         >
           {user.friends_count} friends

@@ -61,3 +61,11 @@ export interface ProfileResponse {
 export interface FriendshipRequestResponse {
   message: string;
 }
+
+export type RequestStatus = 'accepted' | 'rejected';
+
+export interface FriendshipRequest {
+  id: string;
+  created_by: User;
+  created_at?: string;
+}
