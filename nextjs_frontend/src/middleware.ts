@@ -94,6 +94,7 @@ export const config = {
         '/feed:path*',
         '/post/:path*',
         '/profile/:path*',
-        '/search/:path*'
+        '/search/:path*',
+        '/chat/:path*',
     ],
 };

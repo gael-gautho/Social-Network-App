@@ -69,3 +69,31 @@ export interface FriendshipRequest {
   created_by: User;
   created_at?: string;
 }
+
+
+// -------Chat--------
+
+export interface ChatUser {
+  id: string;
+  name: string;
+  get_avatar: string;
+}
+
+export interface Message {
+  id: string;
+  body: string;
+  created_by: ChatUser;
+  created_at_formatted: string;
+}
+
+export interface Conversation {
+  id: string;
+  users: ChatUser[];
+  modified_at_formatted: string;
+  messages?: Message[];
+}
+
+export interface ConversationWithMessages extends Conversation {
+  messages: Message[];
+}
+

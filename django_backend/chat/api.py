@@ -40,7 +40,7 @@ def conversation_get_or_create(request, user_pk):
 
     serializer = ConversationDetailSerializer(conversation)
     
-    return JsonResponse(serializer.data, safe=False)
+    return JsonResponse({"conversation" :serializer.data}, safe=False)
 
 
 @api_view(['POST'])

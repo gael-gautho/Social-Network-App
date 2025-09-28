@@ -23,6 +23,7 @@ class ConversationMessageSerializer(serializers.ModelSerializer):
 
 
 class ConversationDetailSerializer(serializers.ModelSerializer):
+    users = UserSerializer(read_only=True, many=True)
     messages = ConversationMessageSerializer(read_only=True, many=True)
 
     class Meta:

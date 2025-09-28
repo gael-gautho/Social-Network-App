@@ -48,9 +48,9 @@ export default function ProfileSidebar({
 
   const sendDirectMessage = async () => {
     try {
-      const response = await fetch(`/api/chat/${profileId}/get-or-create/`);
+      const response = await apiService.get(`/api/chat/${profileId}/get-or-create/`);
       
-      if (response.ok) {
+      if (response.conversation) {
         router.push('/chat');
       }
     } catch (error) {
