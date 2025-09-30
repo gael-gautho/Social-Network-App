@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-const publicPaths = ['/', '/jobs/[id]', '/jobs/search'];
+const publicPaths = [''];
 
 export async function middleware(req: NextRequest) {
     
@@ -96,5 +96,6 @@ export const config = {
         '/profile/:path*',
         '/search/:path*',
         '/chat/:path*',
+        '/notifications/:path*',
     ],
 };

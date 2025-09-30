@@ -44,6 +44,7 @@ export interface Trend {
 
 export interface UserInfo {
   user_id: string;
+  get_avatar: string;
 }
 
 
@@ -97,3 +98,15 @@ export interface ConversationWithMessages extends Conversation {
   messages: Message[];
 }
 
+
+export interface NotificationType {
+  id: string;
+  body: string;
+  type_of_notification: 'post_like' | 'post_comment' | 'friend_request';
+  post_id: string;
+  created_for_id: string;
+};
+
+export interface MyJwtPayload {
+  user_id: string;
+}

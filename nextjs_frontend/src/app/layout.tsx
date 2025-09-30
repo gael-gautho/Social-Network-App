@@ -31,11 +31,13 @@ export default async function RootLayout({
 }>) {
 
   let user_id = "";
+  let get_avatar = ""
 
   const refreshToken = (await cookies()).get("session_refresh_token")?.value
   
   if (refreshToken) {
     user_id = jwtDecode<UserInfo>(refreshToken).user_id
+    get_avatar = jwtDecode<UserInfo>(refreshToken).get_avatar
   };
 
   return (
@@ -43,7 +45,7 @@ export default async function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <UserProvider userInfo ={{ user_id }}>
+        <UserProvider userInfo ={{ user_id, get_avatar }}>
         <Navbar key={user_id} />      
         <main className="px-8 py-6 bg-gray-100">
         {children}

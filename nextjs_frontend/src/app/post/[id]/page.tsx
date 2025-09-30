@@ -26,7 +26,7 @@ export default async function PostDetailPage({ params }: PostDetailPageProps) {
   return (
     <div className="max-w-7xl mx-auto grid grid-cols-4 gap-4">
       <div className="main-center col-span-3 space-y-4">
-        <PostDetailClient initialPost={post} postId={params.id} />
+        <PostDetailClient initialPost={post} postId={id} />
       </div>
       
       <div className="main-right col-span-1 space-y-4">

@@ -2,7 +2,7 @@
 import { createContext, useContext } from "react";
 import { UserInfo } from "@/types";
 
-const UserContext = createContext<UserInfo>({ user_id: ""});
+const UserContext = createContext<UserInfo>({ user_id: "", get_avatar:""});
 
 export function UserProvider({
   children,

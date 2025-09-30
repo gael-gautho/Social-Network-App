@@ -57,6 +57,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     EMAIL_FIELD = 'email'
     REQUIRED_FIELDS = ['name']
 
+    @property
     def get_avatar(self):
         if self.avatar:
             return settings.WEBSITE_URL + self.avatar.url

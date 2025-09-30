@@ -19,6 +19,7 @@ ALLOWED_HOSTS = []
 
 WEBSITE_URL = 'http://127.0.0.1:8000'
 
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
@@ -43,7 +44,9 @@ REST_FRAMEWORK = {
 
 AUTH_USER_MODEL = 'account.User'
 
+
 SIMPLE_JWT = {
+    "TOKEN_OBTAIN_SERIALIZER": "account.serializers.MyTokenObtainPairSerializer",
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=1),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
     'ROTATE_REFRESH_TOKENS': False,
@@ -131,6 +134,8 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
+    {"NAME": "account.custom_password_validator.CustomPasswordValidator"},
+
 ]
 
 

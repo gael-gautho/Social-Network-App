@@ -71,12 +71,10 @@ const LoginPage = () => {
           
             toast.success("Login successfull. You will be redirected")
             handleLogin(loginResponse.data.access, loginResponse.data.refresh);	
-            router.push('/');
-          
-          // Ensuite, on force la mise à jour des Server Components
-            router.refresh();
-            // window.location.href='/'
-            // window.location.reload()
+            
+            // router.push('/feed');
+            // router.refresh();
+            
 
           } else {
             const tmpError: string[] = Object.values(loginResponse.data).flat().map((error: any) => { return error; })           

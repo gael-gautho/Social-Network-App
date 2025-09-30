@@ -2,6 +2,7 @@ from django.conf import settings
 from django.http import JsonResponse
 from django.contrib.auth.forms import PasswordChangeForm
 from django.core.mail import send_mail
+from rest_framework import status
 
 
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
@@ -54,11 +55,16 @@ def signup(request):
             [user.email],
             fail_silently=False,
         )
+        return JsonResponse(
+            {"message": "success"},
+            status=status.HTTP_201_CREATED, safe=False  
+        )
 
     else:
-        message = form.errors.as_json()
-    
-    return JsonResponse({'message': message}, safe=False)
+        message = form.errors
+        return JsonResponse( message,
+                            status=status.HTTP_400_BAD_REQUEST, safe=False)
+
 
 
 @api_view(['POST'])
