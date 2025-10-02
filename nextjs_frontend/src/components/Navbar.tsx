@@ -1,3 +1,4 @@
+import { getUser } from "@/libs/actions";
 import { UserInfo } from "@/types";
 import { jwtDecode } from "jwt-decode";
 import { cookies } from "next/headers";
@@ -8,11 +9,7 @@ export default async function Navbar() {
 
     const refreshToken = (await cookies()).get('session_refresh_token')?.value;
     
-    let userInfo = null;
-
-    if (refreshToken) {
-        userInfo = jwtDecode<UserInfo>(refreshToken)
-    }
+    const user = await getUser();
 
 
 return(
@@ -58,8 +55,8 @@ return(
                 </div>}
             
 
-                {refreshToken ? (<div><Link href={`/profile/${userInfo?.user_id}`}>
-                <img src={userInfo?.get_avatar} className="w-10 h-10 rounded-full"/>
+                {refreshToken ? (<div><Link href={`/profile/${user?.id}`}>
+                <img src={user?.avatar} className="w-10 h-10 rounded-full"/>
                                         </Link></div>) : 
                     
                     (<div className="hidden md:flex items-center space-x-8">

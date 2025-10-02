@@ -97,5 +97,6 @@ export const config = {
         '/search/:path*',
         '/chat/:path*',
         '/notifications/:path*',
+        '/login/:path*'
     ],
 };

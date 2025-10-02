@@ -3,6 +3,7 @@ from django.http import JsonResponse
 from django.contrib.auth.forms import PasswordChangeForm
 from django.core.mail import send_mail
 from rest_framework import status
+from rest_framework_simplejwt.tokens import RefreshToken
 
 
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
@@ -21,7 +22,7 @@ def me(request):
         'id': request.user.id,
         'name': request.user.name,
         'email': request.user.email,
-        'avatar': request.user.get_avatar()
+        'avatar': request.user.get_avatar
     })
 
 
@@ -147,7 +148,11 @@ def editprofile(request):
         
         serializer = UserSerializer(user)
 
-        return JsonResponse({'message': 'information updated', 'user': serializer.data})
+        refresh = RefreshToken.for_user(user)
+
+        return JsonResponse({'message': 'information updated', 
+        'access': str(refresh.access_token),
+        'user': serializer.data})
 
 
 @api_view(['POST'])
