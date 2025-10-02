@@ -1,8 +1,7 @@
 import EditProfileForm from '@/components/EditProfileForm';
-import { getAccessToken } from '@/libs/actions';
 import { redirect } from 'next/navigation';
-import { getUserInfo } from '@/libs/actions';
 import apiService from '@/libs/apiService';
+import Link from 'next/link';
 
 
 export default async function EditProfilePage() {
@@ -22,12 +21,12 @@ export default async function EditProfilePage() {
             Modify your informations
           </p>
 
-          <a 
+          <Link 
             href="/profile/edit/password" 
             className="text-purple-600 hover:text-purple-800 underline transition-colors"
           >
             Edit password
-          </a>
+          </Link>
         </div>
       </div>
 
