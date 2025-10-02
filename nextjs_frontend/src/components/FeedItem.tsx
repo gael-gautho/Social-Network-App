@@ -8,7 +8,7 @@ import { toast } from 'sonner';
 
 interface FeedItemProps {
   post: Post;
-  onDeletePost: (id: string) => void;
+  onDeletePost?: (id: string) => void;
 }
 
 export default function FeedItem({ post, onDeletePost }: FeedItemProps) {
@@ -33,7 +33,7 @@ export default function FeedItem({ post, onDeletePost }: FeedItemProps) {
   const deletePost = async () => {
     try {
       const response = await apiService.delete(`/api/posts/${post.id}/delete/`);
-      if (response.message) {
+      if (onDeletePost && response.message) {
         onDeletePost(post.id);
         toast.success('Post deleted')
       }
