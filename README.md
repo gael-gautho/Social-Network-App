@@ -11,7 +11,6 @@ A social network app similar to twitter or facebook
 - Real-time private messaging
 - Friend request system (send, accept, reject)
 - Profile editing with avatar upload
-- Human-readable timestamps
 
 ## :space_invader: Tech Stack
 
