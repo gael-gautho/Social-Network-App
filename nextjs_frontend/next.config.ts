@@ -11,6 +11,9 @@ const nextConfig: NextConfig = {
       {
         protocol: "http",
         hostname: "127.0.0.1",
+      },{
+        protocol: "https",
+        hostname: "social-network-app-on3v.onrender.com",
       },
     ],
   }

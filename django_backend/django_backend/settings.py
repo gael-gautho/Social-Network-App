@@ -16,7 +16,7 @@ SECRET_KEY = 'django-insecure-21-i0ex87o)^j_r&yimdwi&+g-5v*@=q03!qhqd7_3d2v)*zul
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(os.environ.get("DEBUG", default=0))
 
-WEBSITE_URL = 'http://127.0.0.1:8000'
+WEBSITE_URL = os.environ.get("WEBSITE_URL")
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
