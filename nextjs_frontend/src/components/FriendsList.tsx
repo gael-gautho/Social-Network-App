@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { User } from '@/types';
+import Image from 'next/image';
 
 interface FriendsListProps {
   friends: User[];
@@ -20,10 +21,11 @@ export default function FriendsList({ friends }: FriendsListProps) {
             key={user.id}
             className="p-4 text-center bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
           >
-            <img 
+            <Image 
               src={user.get_avatar}
               alt={user.name}
-              className="mb-6 rounded-full w-full max-w-[80px] mx-auto"
+              width={80} height={80}
+              className="mb-6 rounded-full w-[80px] h-[80px] mx-auto"
             />
             
             <p className="mb-4">

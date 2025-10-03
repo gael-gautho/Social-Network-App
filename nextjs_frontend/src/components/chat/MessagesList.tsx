@@ -1,6 +1,7 @@
 'use client';
 
 import { Message } from '@/types';
+import Image from 'next/image';
 
 interface MessagesListProps {
   messages: Message[];
@@ -31,9 +32,10 @@ export default function MessagesList({ messages, currentUserId }: MessagesListPr
           >
             {!isCurrentUser && (
               <div className="flex-shrink-0">
-                <img 
+                <Image 
                   src={message.created_by.get_avatar} 
                   alt={message.created_by.name}
+                  width={40} height={40}
                   className="w-10 h-10 rounded-full"
                 />
               </div>
@@ -59,9 +61,10 @@ export default function MessagesList({ messages, currentUserId }: MessagesListPr
 
             {isCurrentUser && (
               <div className="flex-shrink-0">
-                <img 
+                <Image 
                   src={message.created_by.get_avatar} 
                   alt={message.created_by.name}
+                  width={40} height={40}
                   className="w-10 h-10 rounded-full"
                 />
               </div>

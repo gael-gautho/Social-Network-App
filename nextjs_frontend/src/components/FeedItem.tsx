@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Post } from '@/types';
 import apiService from '@/libs/apiService';
 import { toast } from 'sonner';
+import Image from 'next/image';
 
 interface FeedItemProps {
   post: Post;
@@ -60,7 +61,7 @@ export default function FeedItem({ post, onDeletePost }: FeedItemProps) {
     <>
       <div className="mb-6 flex items-center justify-between">
         <div className="flex items-center space-x-6">
-          <img src={post.created_by.get_avatar} className="w-[40px] h-[40px] rounded-full" alt={post.created_by.name} />
+          <Image src={post.created_by.get_avatar}  width={40} height={40} className="w-10 h-10 rounded-full" alt={post.created_by.name} />
           <p>
             <strong>
               <Link href={`/profile/${post.created_by.id}`}>
@@ -73,16 +74,19 @@ export default function FeedItem({ post, onDeletePost }: FeedItemProps) {
       </div>
 
       {post.attachments.length > 0 && (
-        <>
+        
+        <div className="h-[500px] relative">
           {post.attachments.map((image) => (
-            <img
+            <Image
               key={image.id}
               src={image.get_image}
-              className="w-full mb-4 rounded-xl"
+              fill
+              className="mb-4 rounded-xl"
               alt="Post attachment"
             />
           ))}
-        </>
+        </div>
+        
       )}
 
       <p>{post.body}</p>

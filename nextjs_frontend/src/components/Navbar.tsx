@@ -1,16 +1,17 @@
 import { getUser } from "@/libs/actions";
-import { UserInfo } from "@/types";
-import { jwtDecode } from "jwt-decode";
+import { User } from "@/types";
 import { cookies } from "next/headers";
+import Image from "next/image";
 import Link from "next/link";
 
 
 export default async function Navbar() {
 
+    let user : Partial<User> | null = null
     const refreshToken = (await cookies()).get('session_refresh_token')?.value;
-    
-    const user = await getUser();
-
+    if (refreshToken) {
+       user = await getUser();
+    }
 
 return(
     <nav className="top-0 w-full z-50 bg-white/80 backdrop-blur-lg border-b border-gray-200/50">
@@ -56,7 +57,7 @@ return(
             
 
                 {refreshToken ? (<div><Link href={`/profile/${user?.id}`}>
-                <img src={user?.avatar} className="w-10 h-10 rounded-full"/>
+                <Image src={user?.get_avatar || ''} alt={user?.name || ''} width={40} height={40} className="w-10 h-10 rounded-full"/>
                                         </Link></div>) : 
                     
                     (<div className="hidden md:flex items-center space-x-8">

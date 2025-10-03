@@ -7,7 +7,7 @@ export async function middleware(req: NextRequest) {
     const path = req.nextUrl.pathname;
     const isPublicPath = publicPaths.includes(path);
 
-    let accessToken = req.cookies.get('session_access_token')?.value;
+    const accessToken = req.cookies.get('session_access_token')?.value;
     const refreshToken = req.cookies.get('session_refresh_token')?.value;
 
     console.log("-----in middleware")
@@ -50,7 +50,8 @@ export async function middleware(req: NextRequest) {
     }
 
     // Pas de refresh token → redirection login
-    
+
+
     if (req.nextUrl.pathname.startsWith('/api/')) {
         // Pour les appels API, on renvoie une erreur 401.
         console.log(`[Middleware] API request to ${req.nextUrl.pathname} denied with 401.`);
@@ -62,7 +63,7 @@ export async function middleware(req: NextRequest) {
         response.cookies.delete('session_refresh_token');
         return response;
 
-    } else if ( !isPublicPath ) {
+    } else if ( !isPublicPath && !req.nextUrl.pathname.startsWith('/login') ) {
         // Pour les navigations de page, on redirige vers le login.
         console.log(`[Middleware] Page navigation to ${req.nextUrl.pathname} redirected to /login.`);
         const loginUrl = new URL('/login', req.url);

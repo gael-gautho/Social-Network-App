@@ -5,6 +5,7 @@ import Link from 'next/link';
 import apiService from '@/libs/apiService';
 import { FriendshipRequest, RequestStatus } from '@/types';
 import { toast } from 'sonner';
+import Image from 'next/image';
 
 interface FriendshipRequestsProps {
   requests: FriendshipRequest[];
@@ -60,10 +61,11 @@ export default function FriendshipRequests({
               className="p-4 bg-gray-50 rounded-lg border border-gray-100"
             >
               <div className="flex items-center space-x-4 mb-4">
-                <img 
+                <Image 
                   src={friendshipRequest.created_by.get_avatar}
                   alt={friendshipRequest.created_by.name}
-                  className="w-12 h-12 rounded-full"
+                  width={60} height={60}
+                  className="w-[60px] h-[60px] rounded-full"
                 />
                 
                 <div className="flex-1">

@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import ChatClient from '@/components/chat/ChatClient';
 import apiService from '@/libs/apiService';
 import { Conversation } from '@/types';

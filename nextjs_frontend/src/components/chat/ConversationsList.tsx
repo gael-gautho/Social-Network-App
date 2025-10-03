@@ -1,6 +1,7 @@
 'use client';
 
 import { Conversation } from '@/types';
+import Image from 'next/image';
 
 interface ConversationsListProps {
   conversations: Conversation[];
@@ -43,9 +44,10 @@ export default function ConversationsList({
               `}
             >
               <div className="flex items-center space-x-3 flex-1 min-w-0">
-                <img 
+                <Image 
                   src={otherUser.get_avatar} 
                   alt={otherUser.name}
+                  width={40} height={40}
                   className="w-10 h-10 rounded-full flex-shrink-0"
                 />
                 

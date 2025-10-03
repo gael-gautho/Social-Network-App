@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { User } from '@/types';
 import apiService from '@/libs/apiService';
+import Image from 'next/image';
 
 
 export default async function PeopleYouMayKnow() {
@@ -18,7 +19,7 @@ export default async function PeopleYouMayKnow() {
         {users.map((user) => (
           <div key={user.id} className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
-              <img src={user.get_avatar} className="w-[40px] rounded-full" alt={user.name} />
+              <Image src={user.get_avatar} width={40} height={40} className="w-[40px] h-[40px] rounded-full" alt={user.name} />
               <p className="text-xs">
                 <strong>{user.name}</strong>
               </p>

@@ -19,7 +19,7 @@ export default function ProfileClient({
 }: ProfileClientProps) {
   const [user, setUser] = useState<ProfileUser>(initialUser);
   const [posts, setPosts] = useState<Post[]>(initialPosts);
-  const router = useRouter();
+  // const router = useRouter();
 
   // Rechargement des données si l'ID change
   useEffect(() => {

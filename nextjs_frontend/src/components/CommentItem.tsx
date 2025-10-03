@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { Comment } from '@/types';
+import Image from 'next/image';
 
 interface CommentItemProps {
   comment: Comment;
@@ -12,7 +13,7 @@ export default function CommentItem({ comment }: CommentItemProps) {
     <>
       <div className="mb-6 flex items-center justify-between">
         <div className="flex items-center space-x-6">
-          <img 
+          <Image 
             src={comment.created_by.get_avatar} 
             alt={comment.created_by.name}
             className="w-[40px] h-[40px] rounded-full"

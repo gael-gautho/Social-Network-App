@@ -4,6 +4,7 @@ import Link from 'next/link';
 import FeedItem from '@/components/FeedItem';
 import { User } from '@/types';
 import { Post } from '@/types';
+import Image from 'next/image';
 
 interface SearchResultsProps {
   query: string;
@@ -52,10 +53,11 @@ export default function SearchResults({ query, users, posts }: SearchResultsProp
                 key={user.id}
                 className="p-4 text-center bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
               >
-                <img 
+                <Image 
                   src={user.get_avatar} 
                   alt={user.name}
-                  className="w-16 h-16 rounded-full mx-auto mb-3"
+                  width={60} height={60}
+                  className="w-[60px] h-[60px] rounded-full mx-auto mb-3"
                 />
                 
                 <p className="mb-3">

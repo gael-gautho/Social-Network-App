@@ -4,6 +4,7 @@ import FriendsClient from '@/components/FriendsClient';
 import PeopleYouMayKnow from '@/components/PeopleYouMayKnow';
 import Trends from '@/components/Trends';
 import apiService from '@/libs/apiService';
+import Image from 'next/image';
 
 interface FriendsPageProps {
   params: {
@@ -25,11 +26,16 @@ export default async function FriendsPage({ params }: FriendsPageProps) {
     <div className="max-w-7xl mx-auto grid grid-cols-4 gap-4">
       <div className="main-left col-span-1">
         <div className="p-4 bg-white border border-gray-200 text-center rounded-lg">
-          <img 
-            src={friendsData.user.get_avatar} 
-            alt={friendsData.user.name}
-            className="mb-6 rounded-full w-full"
-          />
+          <div className='h-[150px] relative'>
+            <Image 
+              src={friendsData.user.get_avatar} 
+              alt={friendsData.user.name}
+              fill
+              sizes="50vw"
+              className="mb-6 rounded-md "
+              priority
+            />
+          </div>
           
           <p>
             <strong>{friendsData.user.name}</strong>

@@ -1,9 +1,10 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import MessagesList from './MessagesList';
 import MessageForm from './MessageForm';
 import { ConversationWithMessages } from '@/types';
+import Image from 'next/image';
 
 interface ChatWindowProps {
   conversation: ConversationWithMessages;
@@ -35,9 +36,10 @@ export default function ChatWindow({
       {otherUser && (
         <div className="bg-white border border-gray-200 rounded-lg p-4">
           <div className="flex items-center space-x-3">
-            <img 
+            <Image 
               src={otherUser.get_avatar} 
               alt={otherUser.name}
+              width={40} height={40}
               className="w-10 h-10 rounded-full"
             />
             <div>

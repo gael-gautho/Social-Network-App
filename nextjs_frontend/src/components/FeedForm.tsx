@@ -4,6 +4,7 @@ import { useState, useRef } from 'react';
 import { Post } from '@/types';
 import apiService from '@/libs/apiService';
 import { toast } from 'sonner';
+import Image from 'next/image';
 
 interface FeedFormProps {
   onPostCreated: (post: Post) => void;
@@ -86,7 +87,7 @@ export default function FeedForm({ onPostCreated }: FeedFormProps) {
 
         {previewUrl && (
           <div className="mt-3">
-            <img src={previewUrl} className="w-[100px] rounded-xl" alt="Preview" />
+            <Image src={previewUrl} className="w-[100px] rounded-xl" alt="Preview" />
           </div>
         )}
       </div>

@@ -7,6 +7,7 @@ import { ProfileUser, FriendshipRequestResponse } from '@/types';
 import { useUser } from '@/app/userContext';
 import apiService from '@/libs/apiService';
 import { toast } from 'sonner';
+import Image from 'next/image';
 
 interface ProfileSidebarProps {
   user: ProfileUser;
@@ -66,12 +67,17 @@ export default function ProfileSidebar({
 
   return (
     <div className="p-4 bg-white border border-gray-200 text-center rounded-lg">
-      <img 
+      <div className='h-[150px] relative'>
+      <Image 
         src={user.get_avatar} 
         alt={user.name}
+        fill
+        sizes="50vw"
         className="mb-6 h-[150px] w-full rounded-md "
+        priority
       />
-      
+      </div>
+
       <p>
         <strong>{user.name}</strong>
       </p>
