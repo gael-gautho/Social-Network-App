@@ -14,25 +14,28 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-21-i0ex87o)^j_r&yimdwi&+g-5v*@=q03!qhqd7_3d2v)*zul'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
+DEBUG = bool(os.environ.get("DEBUG", default=0))
 
 WEBSITE_URL = 'http://127.0.0.1:8000'
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
-FRONTEND_URLS = os.environ.get("FRONTEND_URLS")
+frontend_urls = os.environ.get("FRONTEND_URLS")
+
+ALLOWED_HOSTS = [
+    "http://localhost:3000",
+    "http://localhost:5173",
+] + [url.strip() for url in frontend_urls.split(",") if url.strip()]
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost:5173",
-] + [url.strip() for url in FRONTEND_URLS.split(",") if url.strip()]
+] + [url.strip() for url in frontend_urls.split(",") if url.strip()]
 
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost:5173",
-] + [url.strip() for url in FRONTEND_URLS.split(",") if url.strip()]
+] + [url.strip() for url in frontend_urls.split(",") if url.strip()]
 
 
 REST_FRAMEWORK = {
