@@ -22,20 +22,17 @@ WEBSITE_URL = 'http://127.0.0.1:8000'
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
-FRONTEND_URL = os.environ.get("FRONTEND_URL")
+FRONTEND_URLS = os.environ.get("FRONTEND_URLS")
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost:5173",
-     FRONTEND_URL,
-
-]
+] + [url.strip() for url in FRONTEND_URLS.split(",") if url.strip()]
 
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost:5173",
-    FRONTEND_URL,
-]
+] + [url.strip() for url in FRONTEND_URLS.split(",") if url.strip()]
 
 
 REST_FRAMEWORK = {
