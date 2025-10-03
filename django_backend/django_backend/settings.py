@@ -23,9 +23,12 @@ EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 frontend_urls = os.environ.get("FRONTEND_URLS")
 
 ALLOWED_HOSTS = [
-    "http://localhost:3000",
-    "http://localhost:5173",
-] + [url.strip() for url in frontend_urls.split(",") if url.strip()]
+    "localhost",
+] + [
+    url.strip().replace("https://", "").replace("http://", "").split("/")[0]
+    for url in frontend_urls.split(",")
+    if url.strip()
+]
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
