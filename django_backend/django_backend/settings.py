@@ -1,5 +1,6 @@
 from pathlib import Path
 from datetime import timedelta
+import os
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -21,15 +22,19 @@ WEBSITE_URL = 'http://127.0.0.1:8000'
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
+FRONTEND_URL = os.environ.get("FRONTEND_URL")
+
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost:5173",
+     FRONTEND_URL,
 
 ]
 
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost:5173",
+    FRONTEND_URL,
 ]
 
 
