@@ -1,8 +1,10 @@
 from pathlib import Path
 from datetime import timedelta
 import os
+from dotenv import load_dotenv
 
 
+load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -18,12 +20,14 @@ DEBUG = bool(os.environ.get("DEBUG", default=0))
 
 WEBSITE_URL = os.environ.get("WEBSITE_URL")
 
+print(DEBUG)
+
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 frontend_urls = os.environ.get("FRONTEND_URLS")
 
 ALLOWED_HOSTS = [
-    "localhost",
+    "127.0.0.1",
 ] + [
     url.strip().replace("https://", "").replace("http://", "").split("/")[0]
     for url in frontend_urls.split(",")
@@ -39,6 +43,11 @@ CSRF_TRUSTED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost:5173",
 ] + [url.strip() for url in frontend_urls.split(",") if url.strip()]
+
+
+CORS_ALLOWED_ORIGIN_REGEXES = [
+    r"^https:\/\/social-network-app-2-.*\.vercel\.app$",
+]
 
 
 REST_FRAMEWORK = {
