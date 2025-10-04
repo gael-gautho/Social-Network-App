@@ -46,7 +46,7 @@ CSRF_TRUSTED_ORIGINS = [
 
 
 CORS_ALLOWED_ORIGIN_REGEXES = [
-    r"^https:\/\/social-network-app-2-.*\.vercel\.app$",
+    r"^https:\/\/social-network-app.*\.vercel\.app$",
 ]
 
 
