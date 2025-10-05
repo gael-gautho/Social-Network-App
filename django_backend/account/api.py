@@ -172,8 +172,16 @@ def editpassword(request):
 
 @api_view(['GET'])
 def get_friends_suggestions(request):
+    suggestions = request.user.friends_suggestions.all()
 
-    serializer = UserSerializer(request.user.friends_suggestions.all(), many=True)
+    if suggestions.exists():
+        serializer = UserSerializer(suggestions, many=True)
+    else:
+        top_users = User.objects.exclude(id=request.user.id) \
+            .exclude(friends=request.user) \
+            .order_by('-friends_count')[:5]
 
-    return JsonResponse({'data' : serializer.data}, safe=False)
+        serializer = UserSerializer(top_users, many=True)
+
+    return JsonResponse({'data': serializer.data})
 
