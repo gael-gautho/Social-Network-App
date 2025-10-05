@@ -8,6 +8,7 @@ import { useUser } from '@/app/userContext';
 import apiService from '@/libs/apiService';
 import { toast } from 'sonner';
 import Image from 'next/image';
+import { logoutUser } from '@/libs/actions';
 
 interface ProfileSidebarProps {
   user: ProfileUser;
@@ -59,10 +60,11 @@ export default function ProfileSidebar({
     }
   };
 
-  const logout = () => {
-    // userStore.removeToken()
+  const logout = async () => {
+    await logoutUser();
+    toast.success('Successfully logged out');
     console.log('Logout');
-    router.push('/login');
+    //router.push('/login');
   };
 
   return (

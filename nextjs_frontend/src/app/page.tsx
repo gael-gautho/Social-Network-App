@@ -72,69 +72,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Community Section */}
-      <section id="community" className="py-20 bg-gradient-to-r from-purple-900 to-pink-900">
-        <div className="container mx-auto px-6 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-8">
-            Join Our Amazing Community
-          </h2>
-          <p className="text-xl text-purple-200 mb-12 max-w-3xl mx-auto">
-            Be part of a diverse, inclusive community where creativity flourishes and friendships bloom
-          </p>
-          
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="space-y-8">
-              <div className="flex items-start space-x-4 text-left">
-                <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
-                  <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
-                  </svg>
-                </div>
-                <div>
-                  <h3 className="text-xl font-semibold text-white mb-2">Share Your Story</h3>
-                  <p className="text-purple-200">Express yourself through photos, videos, and thoughts</p>
-                </div>
-              </div>
-              
-              <div className="flex items-start space-x-4 text-left">
-                <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
-                  <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
-                  </svg>
-                </div>
-                <div>
-                  <h3 className="text-xl font-semibold text-white mb-2">Build Connections</h3>
-                  <p className="text-purple-200">Meet like-minded people from around the world</p>
-                </div>
-              </div>
-              
-              <div className="flex items-start space-x-4 text-left">
-                <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
-                  <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
-                  </svg>
-                </div>
-                <div>
-                  <h3 className="text-xl font-semibold text-white mb-2">Grow Together</h3>
-                  <p className="text-purple-200">Learn, inspire, and be inspired by our community</p>
-                </div>
-              </div>
-            </div>
-            
-            <div className="relative">
-              <div className="w-80 h-80 mx-auto rounded-full bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm border border-white/20 flex items-center justify-center">
-                <div className="w-60 h-60 rounded-full bg-gradient-to-br from-purple-400 to-pink-400 flex items-center justify-center">
-                  <svg className="w-32 h-32 text-white" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z"/>
-                    <path d="M6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"/>
-                  </svg>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
     </div>
   );
 }

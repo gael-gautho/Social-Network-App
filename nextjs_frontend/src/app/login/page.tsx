@@ -120,8 +120,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="h-[calc(100vh-80px)] px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64 flex items-center justify-center">
-      <form className="flex flex-col gap-8" onSubmit={handleSubmit}>
+    <div className="flex-grow flex items-center justify-center px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64">      <form className="flex flex-col gap-8" onSubmit={handleSubmit}>
         <h1 className="text-2xl font-semibold">{formTitle}</h1>
         
         {/* Username */}
@@ -202,7 +201,7 @@ const LoginPage = () => {
           </div>
         )}
         <button
-          className="bg-red-500 text-white p-2 rounded-md disabled:bg-pink-200 disabled:cursor-not-allowed"
+          className="bg-purple-600 text-white p-2 rounded-md disabled:bg-purple-400 disabled:cursor-not-allowed"
           disabled={isLoading}
         >
           {isLoading ? "Loading..." : buttonTitle}

@@ -16,7 +16,7 @@ class Conversation(models.Model):
         ordering = ('-created_at',)
 
     def modified_at_formatted(self):
-       return timesince(self.created_at)
+       return self.modified_at.strftime("%d %b %Y")
 
 
 class ConversationMessage(models.Model):

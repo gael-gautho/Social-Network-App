@@ -61,8 +61,7 @@ return(
                                         </Link></div>) : 
                     
                     (<div className="hidden md:flex items-center space-x-8">
-                     <Link href="/login" className="mr-4 py-4 px-6 bg-gray-600 text-white rounded-lg">Log in</Link>
-                     <Link href="/signup" className="py-4 px-6 bg-purple-600 text-white rounded-lg">Sign up</Link>
+                     <Link href="/login" className="py-4 px-6 bg-purple-600 text-white rounded-lg">Log in</Link>
                 </div>)}
 
             </div>

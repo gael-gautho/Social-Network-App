@@ -37,7 +37,7 @@ export async function middleware(req: NextRequest) {
                 res.cookies.set('session_access_token', json.access, {
                     httpOnly: true,
                     secure: false, 
-                    maxAge: 60 * 1, // 1 min
+                    maxAge: 60 * 4, 
                     path: '/'
                 });
 
@@ -91,6 +91,7 @@ function isExpired(token: string) {
 
 export const config = {
     matcher: [
+        '/',
         '/api/:path*',
         '/feed:path*',
         '/post/:path*',

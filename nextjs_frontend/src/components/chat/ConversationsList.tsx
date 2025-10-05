@@ -16,6 +16,7 @@ export default function ConversationsList({
   currentUserId,
   onConversationSelect 
 }: ConversationsListProps) {
+  
   const getOtherUser = (conversation: Conversation) => {
     return conversation.users.find(user => user.id !== currentUserId);
   };
@@ -51,21 +52,20 @@ export default function ConversationsList({
                   className="w-10 h-10 rounded-full flex-shrink-0"
                 />
                 
-                <div className="flex-1 min-w-0">
-                  <p className={`
-                    text-sm font-semibold truncate
-                    ${isActive ? 'text-purple-900' : 'text-gray-900'}
-                  `}>
-                    {otherUser.name}
-                  </p>
-                </div>
+                <p className={`
+                  text-sm font-semibold truncate
+                  ${isActive ? 'text-purple-900' : 'text-gray-900'}
+                `}>
+                  {otherUser.name}
+                </p>
+
               </div>
 
               <span className={`
                 text-xs whitespace-nowrap ml-2
                 ${isActive ? 'text-purple-600' : 'text-gray-500'}
               `}>
-                {conversation.modified_at_formatted} ago
+                {conversation.modified_at_formatted}
               </span>
             </div>
           );

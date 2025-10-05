@@ -4,7 +4,7 @@ import { useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import apiService from '@/libs/apiService';
 import { toast } from 'sonner';
-import { setRefreshToken } from '@/libs/actions';
+// import { setRefreshToken } from '@/libs/actions';
 
 interface User {
   id: string;
@@ -64,9 +64,10 @@ export default function EditProfileForm({ user }: EditProfileFormProps) {
     const result = await apiService.post('/api/editprofile/', formData);
 
     if (result && result.message === 'information updated') {
-      if (result.refresh) {
-        await setRefreshToken(result.refresh);
-      }
+      
+      // if (result.refresh) {
+      //   await setRefreshToken(result.refresh);
+      // }
       
       toast.success('Profile updated successfully');
       console.log('Profile updated successfully');

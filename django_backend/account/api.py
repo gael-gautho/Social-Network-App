@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from django.contrib.auth.forms import PasswordChangeForm
 from django.core.mail import send_mail
 from rest_framework import status
-from rest_framework_simplejwt.tokens import RefreshToken
+# from rest_framework_simplejwt.tokens import RefreshToken
 
 
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
@@ -43,19 +43,20 @@ def signup(request):
 
     if form.is_valid():
         user = form.save()
-        user.is_active = False
+        # user.is_active = False
         user.save()
 
-        url = f'{settings.WEBSITE_URL}/api/activateemail/?email={user.email}&id={user.id}'
-        print(url)
+        # url = f'{settings.WEBSITE_URL}/api/activateemail/?email={user.email}&id={user.id}'
+        # print(url)
 
-        send_mail(
-            "Please verify your email",
-            f"The url for activating your account is: {url}",
-            "noreply@wey.com",
-            [user.email],
-            fail_silently=False,
-        )
+        # send_mail(
+        #     "Please verify your email",
+        #     f"The url for activating your account is: {url}",
+        #     "noreply@letslike.com",
+        #     [user.email],
+        #     fail_silently=False,
+        # )
+
         return JsonResponse(
             {"message": "success"},
             status=status.HTTP_201_CREATED, safe=False  
@@ -148,10 +149,10 @@ def editprofile(request):
         
         serializer = UserSerializer(user)
 
-        refresh = RefreshToken.for_user(user)
+        #refresh = RefreshToken.for_user(user)
 
         return JsonResponse({'message': 'information updated', 
-        'access': str(refresh.access_token),
+        #'refresh': str(refresh.refresh_token),
         'user': serializer.data})
 
 
